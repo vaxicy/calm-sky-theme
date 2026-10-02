@@ -46,9 +46,9 @@ TOOLBAR_H = 39
 BOOKMARK_H = 36
 NTP_TOP = TAB_STRIP_H + TOOLBAR_H + BOOKMARK_H
 OMNIBOX_L, OMNIBOX_W, OMNIBOX_H = 152, 769, 33
-WORDMARK_TOP, WORDMARK_SIZE = 111, 78       # relative to the NTP strip
-SEARCH_TOP, SEARCH_L, SEARCH_W, SEARCH_H = 231, 325, 630, 45
-SHORTCUT_TOP = 293                          # relative to the NTP strip
+WORDMARK_TOP, WORDMARK_SIZE = 123, 92       # relative to the NTP strip
+SEARCH_TOP, SEARCH_L, SEARCH_W, SEARCH_H = 251, 295, 690, 50
+SHORTCUT_TOP = 315                          # relative to the NTP strip
 TAB_H, TAB_TOP, TAB_GAP = 25, 4, 13
 CAPTION_W = 127
 
@@ -217,18 +217,19 @@ def build_browser(c):
          background:{ntp}; }}
   .wordmark {{ position:absolute; left:0; right:0; top:{WORDMARK_TOP}px;
               text-align:center; font-size:{WORDMARK_SIZE}px; font-weight:700;
-              letter-spacing:-3px; color:{WORDMARK}; font-family:Arial, sans-serif; }}
+              letter-spacing:-4px; color:{WORDMARK}; font-family:Arial, sans-serif; }}
   .searchbox {{ position:absolute; left:{SEARCH_L}px; top:{SEARCH_TOP}px;
                width:{SEARCH_W}px; height:{SEARCH_H}px; border-radius:{SEARCH_H // 2}px;
                background:#FFFFFF; box-shadow:0 1px 6px rgba(32,33,36,.18);
                display:flex; align-items:center; gap:12px; padding:0 18px; }}
   .shortcuts {{ position:absolute; left:0; right:0; top:{SHORTCUT_TOP}px;
                display:flex; justify-content:center; }}
-  .shortcut {{ width:108px; text-align:center; }}
-  .sdisc {{ width:47px; height:47px; margin:0 auto 10px; border-radius:50%;
+  .shortcut {{ width:120px; text-align:center; }}
+  .sdisc {{ width:54px; height:54px; margin:0 auto 10px; border-radius:50%;
            background:{SHORTCUT_DISC}; display:flex; align-items:center;
            justify-content:center; }}
-  .slabel {{ font-size:12.5px; color:{LABEL}; white-space:nowrap; overflow:hidden;
+  .sdisc svg {{ width:30px; height:30px; }}
+  .slabel {{ font-size:13px; color:{LABEL}; white-space:nowrap; overflow:hidden;
             text-overflow:ellipsis; }}
   .pill {{ position:absolute; right:12px; bottom:14px; height:26px;
           border-radius:13px; background:{PILL_BG}; display:flex;
