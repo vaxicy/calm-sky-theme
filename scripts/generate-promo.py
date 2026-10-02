@@ -166,11 +166,9 @@ def marquee(c):
 
 
 DESCRIPTION = """Calm Sky is a light, airy Chrome theme for quiet, unhurried browsing. A soft \
-sky-blue window frame wraps pale blue-grey tabs, a near-white toolbar sits under them, and \
-the new-tab page opens onto a calm, washed-blue expanse. Deep slate text keeps every label \
-and icon crisp on all of those light surfaces. The design is flat colour throughout - no \
-wallpaper, no patterns, no gradients - and the icon distills it into a sun resting on a \
-still horizon."""
+sky-blue frame, pale blue-grey tabs and a near-white toolbar keep the browser bright, while \
+the new-tab page opens onto a calm, washed-blue sky. Flat colour throughout, with deep slate \
+text that stays crisp on every light surface."""
 
 
 def main():
