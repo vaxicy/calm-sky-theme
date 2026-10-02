@@ -1,0 +1,7 @@
+
+# local working memory / AI data
+.codebuddy/
+
+# python
+__pycache__/
+*.pyc
