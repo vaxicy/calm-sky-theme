@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "name": "Calm Sky Theme",
   "description": "Light and refreshing, perfect for a serene browsing experience.",
+  "icons": {
+    "128": "logo/logo.png"
+  },
   "theme": {
     "colors": {
       "frame": [
