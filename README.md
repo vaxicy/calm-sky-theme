@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/logo/logo.png" width="128" alt="Calm Sky Theme icon">
+  <img src="https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/logo/logo.png?rev=d5c3bb81" width="128" alt="Calm Sky Theme icon">
 </p>
 
 <h1 align="center">Calm Sky Theme</h1>
@@ -52,9 +52,9 @@ Search for **Calm Sky Theme** in the Chrome Web Store and install it.
 
 ## Preview
 
-![Calm Sky Theme browser preview](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-1-browser.png)
+![Calm Sky Theme browser preview](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-1-browser.png?rev=d5c3bb81)
 
-![Calm Sky Theme palette](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-2-introduction.png)
+![Calm Sky Theme palette](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-2-introduction.png?rev=d5c3bb81)
 
 ## Files
 
