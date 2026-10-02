@@ -52,16 +52,16 @@ Search for **Calm Sky Theme** in the Chrome Web Store and install it.
 
 ## Preview
 
-![Calm Sky Theme browser preview](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-1-browser.png?rev=PENDING)
+![Calm Sky Theme browser preview](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-1-browser.png?rev=44de24ca)
 
-![Calm Sky Theme palette](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-2-introduction.png?rev=PENDING)
+![Calm Sky Theme palette](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-2-introduction.png?rev=44de24ca)
 
 ### Store promo tiles
 
-![Calm Sky Theme marquee](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/promo/1400x560.png?rev=PENDING)
+![Calm Sky Theme marquee](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/promo/1400x560.png?rev=44de24ca)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/promo/440x280.png?rev=PENDING" width="440" alt="Calm Sky Theme promo tile">
+  <img src="https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/promo/440x280.png?rev=44de24ca" width="440" alt="Calm Sky Theme promo tile">
 </p>
 
 ## Files
