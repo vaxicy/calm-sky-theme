@@ -13,8 +13,10 @@ the values sampled from that real capture:
   omnibox placeholder    #70757A
   toolbar icon grey      #5F6368
   Customize pill         #202124   (dark pill, light text, blue pencil #89B3F6)
-  shortcut tile discs    #9AC5CF   (the tinted disc behind each favicon)
-  shortcut labels        #5F7381
+
+The NTP shortcut row (YouTube / Chrome Web Store / Add shortcut) is intentionally
+not drawn - removed per user request (2026-10-02); the space goes back to the
+calm sky.
 
 Layer heights measured on that capture: tab strip 29, toolbar 33, bookmark bar
 30 -> 34 / 39 / 36 at 1280 wide. The capture had a focused omnibox with a caret;
@@ -46,9 +48,8 @@ TOOLBAR_H = 39
 BOOKMARK_H = 36
 NTP_TOP = TAB_STRIP_H + TOOLBAR_H + BOOKMARK_H
 OMNIBOX_L, OMNIBOX_W, OMNIBOX_H = 152, 769, 33
-WORDMARK_TOP, WORDMARK_SIZE = 123, 92       # relative to the NTP strip
-SEARCH_TOP, SEARCH_L, SEARCH_W, SEARCH_H = 251, 295, 690, 50
-SHORTCUT_TOP = 315                          # relative to the NTP strip
+WORDMARK_TOP, WORDMARK_SIZE = 200, 100      # relative to the NTP strip
+SEARCH_TOP, SEARCH_L, SEARCH_W, SEARCH_H = 335, 290, 700, 52
 TAB_H, TAB_TOP, TAB_GAP = 25, 4, 13
 CAPTION_W = 127
 
@@ -63,8 +64,6 @@ LENS_BLUE = "#4285F4"
 PILL_BG = "#202124"
 PILL_TEXT = "#FFFFFF"
 PILL_PENCIL = "#89B3F6"
-SHORTCUT_DISC = "#9AC5CF"
-LABEL = "#5F7381"
 
 # title, width, favicon kind - the user's real tabs, in English
 TABS = (
@@ -109,12 +108,6 @@ def favicon(kind, frame):
                  f'<circle cx="8" cy="8" r="4.6" fill="none" stroke="#7E8F9C" stroke-width="1.1"/>'
                  f'<path d="M3.4 8h9.2M8 3.4c1.6 2.6 1.6 6.6 0 9.2-1.6-2.6-1.6-6.6 0-9.2z" '
                  f'fill="none" stroke="#7E8F9C" stroke-width="1"/></svg>',
-        "youtube": f'<svg viewBox="0 0 24 24" width="100%" height="100%">'
-                   f'<rect x="1.5" y="5" width="21" height="14" rx="4" fill="#FF0033"/>'
-                   f'<path d="M10 9l6 3-6 3z" fill="#fff"/></svg>',
-        "plus": f'<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" '
-                f'stroke="{ICON_GRAY}" stroke-width="2.2" stroke-linecap="round">'
-                f'<path d="M12 6v12M6 12h12"/></svg>',
     }[kind]
 
 
@@ -222,15 +215,6 @@ def build_browser(c):
                width:{SEARCH_W}px; height:{SEARCH_H}px; border-radius:{SEARCH_H // 2}px;
                background:#FFFFFF; box-shadow:0 1px 6px rgba(32,33,36,.18);
                display:flex; align-items:center; gap:12px; padding:0 18px; }}
-  .shortcuts {{ position:absolute; left:0; right:0; top:{SHORTCUT_TOP}px;
-               display:flex; justify-content:center; }}
-  .shortcut {{ width:120px; text-align:center; }}
-  .sdisc {{ width:54px; height:54px; margin:0 auto 10px; border-radius:50%;
-           background:{SHORTCUT_DISC}; display:flex; align-items:center;
-           justify-content:center; }}
-  .sdisc svg {{ width:30px; height:30px; }}
-  .slabel {{ font-size:13px; color:{LABEL}; white-space:nowrap; overflow:hidden;
-            text-overflow:ellipsis; }}
   .pill {{ position:absolute; right:12px; bottom:14px; height:26px;
           border-radius:13px; background:{PILL_BG}; display:flex;
           align-items:center; gap:8px; padding:0 13px; font-size:13px;
@@ -309,20 +293,6 @@ def build_browser(c):
       <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
            stroke="{LENS_BLUE}" stroke-width="1.9"><circle cx="11" cy="11" r="6.2"/>
         <path d="M16 16l4.5 4.5"/></svg>
-    </div>
-    <div class="shortcuts">
-      <div class="shortcut">
-        <div class="sdisc">{favicon('youtube', frame)}</div>
-        <div class="slabel">YouTube</div>
-      </div>
-      <div class="shortcut">
-        <div class="sdisc">{favicon('store', frame)}</div>
-        <div class="slabel">Chrome Web Store</div>
-      </div>
-      <div class="shortcut">
-        <div class="sdisc">{favicon('plus', frame)}</div>
-        <div class="slabel">Add shortcut</div>
-      </div>
     </div>
     <div class="pill">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none"
