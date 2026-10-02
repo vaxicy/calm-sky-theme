@@ -51,25 +51,54 @@ def glow(img, cx, cy, r, color, alpha, blur):
     img.alpha_composite(lay.filter(ImageFilter.GaussianBlur(blur)))
 
 
-def swatch(img, x, y, size, radius, color, label=None, txt=None):
+def swatch(img, x, y, size, radius, color, label=None, txt=None, halo=0):
     # No outline on purpose: PIL writes RGBA outline pixels straight into the
     # layer instead of blending them, which turns into a hard dark ring once the
-    # image is flattened to RGB.
-    ImageDraw.Draw(img).rounded_rectangle(
-        [x, y, x + size, y + size], radius=radius, fill=tuple(color))
+    # image is flattened to RGB. A `halo` is a filled white shape drawn behind
+    # the chip instead, so light chips still read on a blue background.
+    d = ImageDraw.Draw(img)
+    if halo:
+        d.rounded_rectangle([x - halo, y - halo, x + size + halo, y + size + halo],
+                            radius=radius + halo, fill=(255, 255, 255))
+    d.rounded_rectangle([x, y, x + size, y + size], radius=radius, fill=tuple(color))
     if label:
         txt.text((x + size + 16 * SS, y + (size - 15 * SS) / 2 - 2 * SS),
                  label, font=txt, fill=(99, 99, 99))
 
 
+def save_png(img, out, size):
+    """PIL intermittently raises OSError 22 when saving into this repo's
+    non-ASCII path - retry a few times before giving up (see the Windows note
+    in the project rules)."""
+    for attempt in range(4):
+        try:
+            img.resize(size, Image.LANCZOS).convert("RGB").save(out, "PNG")
+            print("wrote", out)
+            return
+        except OSError as exc:
+            if attempt == 3:
+                raise
+            print(f"  save retry ({exc})")
+
+
+def sky_bg(w, h, c):
+    """The theme's own sky: light blue at the top, deeper blue at the bottom.
+
+    Deliberately drawn from the frame colour instead of the greyish new-tab
+    tint, so the promo does not read as washed-out grey.
+    """
+    light = mix(c["frame"], (255, 255, 255), 0.30)
+    deep = mix(c["frame"], c["tab_text"], 0.06)
+    return grad(w, h, light, deep, angle=112)
+
+
 def promo_tile(c):
     W, H = 440, 280
     img = Image.new("RGBA", (W * SS, H * SS), (255, 255, 255, 255))
-    img.paste(grad(W * SS, H * SS, c["ntp_background"],
-                   mix(c["frame"], c["ntp_background"], 0.30)))
-    glow(img, 372 * SS, 42 * SS, 210 * SS, c["frame"], 120, 96 * SS)
+    img.paste(sky_bg(W * SS, H * SS, c))
+    glow(img, 372 * SS, 40 * SS, 200 * SS, (255, 255, 255), 70, 96 * SS)
 
-    ink, muted = tuple(c["tab_text"]), tuple(c["toolbar_button_icon"])
+    ink, muted = tuple(c["tab_text"]), mix(c["tab_text"], c["frame"], 0.18)
     img.alpha_composite(sunrise_tile(104, c), (40 * SS, 56 * SS))
 
     d = ImageDraw.Draw(img)
@@ -78,25 +107,23 @@ def promo_tile(c):
 
     x = 170
     for col in (c["frame"], c["background_tab"], c["toolbar"], c["tab_text"]):
-        swatch(img, x * SS, 174 * SS, 32 * SS, 10 * SS, col)
+        swatch(img, x * SS, 174 * SS, 32 * SS, 10 * SS, col, halo=3 * SS)
         x += 46
     assert x - 14 <= W - 32, "promo swatch row overflows"
 
     out = PROMO / "440x280.png"
     out.parent.mkdir(parents=True, exist_ok=True)
-    img.resize((W, H), Image.LANCZOS).convert("RGB").save(out, "PNG")
-    print("wrote", out)
+    save_png(img, out, (W, H))
 
 
 def marquee(c):
     W, H = 1400, 560
     img = Image.new("RGBA", (W * SS, H * SS), (255, 255, 255, 255))
-    img.paste(grad(W * SS, H * SS, c["ntp_background"],
-                   mix(c["frame"], c["ntp_background"], 0.26)))
-    glow(img, 1160 * SS, 110 * SS, 320 * SS, c["frame"], 96, 150 * SS)
+    img.paste(sky_bg(W * SS, H * SS, c))
+    glow(img, 1180 * SS, 90 * SS, 300 * SS, (255, 255, 255), 70, 150 * SS)
 
     margin, right = 64, W - 64
-    ink, muted = tuple(c["tab_text"]), tuple(c["toolbar_button_icon"])
+    ink, muted = tuple(c["tab_text"]), mix(c["tab_text"], c["frame"], 0.18)
 
     img.alpha_composite(sunrise_tile(220, c), (margin * SS, 142 * SS))
 
@@ -110,7 +137,7 @@ def marquee(c):
 
     x = margin + 268
     for col in (c["frame"], c["background_tab"], c["toolbar"], c["tab_text"]):
-        swatch(img, x * SS, 396 * SS, 84 * SS, 22 * SS, col)
+        swatch(img, x * SS, 396 * SS, 84 * SS, 22 * SS, col, halo=4 * SS)
         x += 102
     assert x - 18 <= right, "marquee swatch row overflows"
 
@@ -135,8 +162,7 @@ def marquee(c):
     assert cy + card_h <= H - 12, "palette card breaks the bottom margin"
 
     out = PROMO / "1400x560.png"
-    img.resize((W, H), Image.LANCZOS).convert("RGB").save(out, "PNG")
-    print("wrote", out)
+    save_png(img, out, (W, H))
 
 
 DESCRIPTION = """Calm Sky is a light, airy Chrome theme for quiet, unhurried browsing. A soft \
