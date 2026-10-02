@@ -52,7 +52,7 @@ Search for **Calm Sky Theme** in the Chrome Web Store and install it.
 
 ## Preview
 
-![Calm Sky Theme browser preview](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-1-browser.png?rev=PENDING)
+![Calm Sky Theme browser preview](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-1-browser.png?rev=0169459d)
 
 ![Calm Sky Theme palette](https://raw.githubusercontent.com/vaxicy/calm-sky-theme/main/store-assets/screenshots/en/screenshot-2-introduction.png?rev=44de24ca)
 
